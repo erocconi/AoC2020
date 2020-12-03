@@ -13,8 +13,8 @@ with open("./input/d3.txt", "r") as inputFile:
         trees = 0
         xPos = 0
         for i in input[::path[1]]:
-            if xPos > 30:
-                xPos = xPos - 31
+            if xPos > (len(i) -1):
+                xPos = xPos - len(i)
             if i[xPos] == '#':
                 trees += 1
                 xPos += path[0]
