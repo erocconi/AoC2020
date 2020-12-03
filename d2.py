@@ -4,12 +4,11 @@ with open("./input/d2.txt", "r") as inputFile:
     p2Count = 0
 
     for i in input:
-        x = i.split()
-        ranges = x[0].split('-')
-        letter = x[1][0]
-        text = x[2]
-        if text.count(letter) >= int(ranges[0]) and text.count(letter) <= int(ranges[1]):
+        ranges, letter, text = i.split()
+        lower, upper = ranges.split('-')
+        letter = letter[0]
+        if text.count(letter) >= int(lower) and text.count(letter) <= int(upper):
             p1Count += 1
-        if (text[(int(ranges[0])-1)] == letter) ^ (text[(int(ranges[1])-1)] == letter):
+        if (text[(int(lower)-1)] == letter) ^ (text[(int(upper)-1)] == letter):
             p2Count += 1
     print(f"Part 1: {p1Count}\nPart 2: {p2Count}")
