@@ -2,7 +2,7 @@ input = open("./input/d4.txt", "r").read().splitlines()
 passports = []
 passport = {}
 count,count2 = 0,0
-items = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"]
+items = ("byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid")
 eyes = ("amb", "blu", "brn", "gry", "grn", "hzl", "oth")
 
 def validatePassport(pport):
@@ -14,30 +14,28 @@ def validatePassport(pport):
     return True
 
 def validatePart2(pport):
-    if not (int(pport["byr"]) >= 1920 and int(pport["byr"]) <= 2002):
+    if not (1920 <= int(pport["byr"]) <= 2002):
         return False
-    if not (int(pport["iyr"]) >= 2010 and int(pport["iyr"]) <= 2020):
+    if not (2010 <= int(pport["iyr"]) <= 2020):
         return False
-    if not (int(pport["eyr"]) >= 2020 and int(pport["eyr"]) <= 2030):
+    if not (2020 <= int(pport["eyr"]) <= 2030):
         return False
-    height = pp["hgt"]
-    if height[-2:] == "cm":
-        if not (150 <= int(height[:-2]) <= 193):
+    if pport["hgt"][-2:] == "cm":
+        if not (150 <= int(pport["hgt"][:-2]) <= 193):
             return False
-    elif height[-2:] == "in":
-        if not (59 <= int(height[:-2]) <= 76):
-            return False
-    else:
-        return False
-    hair = pp["hcl"]
-    if hair[0] == '#':
-        if not int(hair[1:], 16):
+    elif pport["hgt"][-2:] == "in":
+        if not (59 <= int(pport["hgt"][:-2]) <= 76):
             return False
     else:
         return False
-    if pp["ecl"] not in eyes:
+    if pport["hcl"][0] == '#':
+        if not int(pport["hcl"][1:], 16):
+            return False
+    else:
         return False
-    if len(pp["pid"]) != 9 or pp["pid"].isnumeric() == False:
+    if pport["ecl"] not in eyes:
+        return False
+    if len(pport["pid"]) != 9 or pport["pid"].isnumeric() == False:
         return False
     return True
 
