@@ -1,8 +1,6 @@
 input = open("./input/d5.txt", "r").read().splitlines()
 rows = [0,127]
 seats = [0,7]
-low = ['F','L']
-high = ['B','R']
 seatIds = []
 
 def missing_numbers(num_list):
@@ -17,13 +15,13 @@ def is_consecutive(l):
 def search(range,loc): 
     mid = (range[0] + range[1]) // 2
     if is_consecutive(range):
-        if loc in low:
+        if loc in ['F','L']:
             return range[0]
-        elif loc in high:
+        elif loc in ['B','R']:
             return range[1]
-    elif loc in low:
+    elif loc in ['F','L']:
         newRange = [range[0],(mid)]
-    elif loc in high:
+    elif loc in ['B','R']:
         newRange = [(mid+1),range[1]]
     return newRange
 
