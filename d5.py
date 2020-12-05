@@ -16,18 +16,16 @@ def is_consecutive(l):
 
 def search(range,loc): 
     mid = (range[0] + range[1]) // 2
-
-    if loc in low:
+    if is_consecutive(range):
+        if loc in low:
+            return range[0]
+        elif loc in high:
+            return range[1]
+    elif loc in low:
         newRange = [range[0],(mid)]
     elif loc in high:
         newRange = [(mid+1),range[1]]
-    if is_consecutive(range):
-        if loc in low:
-            return newRange[0]
-        elif loc in high:
-            return newRange[1]
-    else:
-        return newRange
+    return newRange
 
 for boardingPass in input:
     rowRange = rows
