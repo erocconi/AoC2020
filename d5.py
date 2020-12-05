@@ -3,8 +3,7 @@ rows = [0,127]
 seats = [0,7]
 low = ['F','L']
 high = ['B','R']
-seatArr = []
-#SUBTRACT ONE AT THE END
+seatIds = []
 
 def missing_numbers(num_list):
       original_list = [x for x in range(num_list[0], num_list[-1] + 1)]
@@ -16,7 +15,6 @@ def is_consecutive(l):
     return len(l) == len(setl) and setl == set(range(min(l), max(l)+1))
 
 def search(range,loc): 
-    
     mid = (range[0] + range[1]) // 2
 
     if loc in low:
@@ -31,22 +29,15 @@ def search(range,loc):
     else:
         return newRange
 
-for i in input:
+for boardingPass in input:
     rowRange = rows
     seatRange = seats
-    for j in i[:7]:
-        if type(rowRange) is list:
-            rowRange = search(rowRange,j)
-    for k in i[-3:]:
-        if type(seatRange) is list:
-            seatRange = search(seatRange,k)
+    for rowCode in boardingPass[:7]:
+        rowRange = search(rowRange,rowCode)
+    for seatCode in boardingPass[-3:]:
+        seatRange = search(seatRange,seatCode)
+    seatIds.append((rowRange*8)+seatRange)
 
-    row = rowRange
-    seat = seatRange
-    seatId = (row*8)+seat
-    seatArr.append(seatId)
-
-seatArr = sorted(seatArr)
-missing = missing_numbers(seatArr)
-
-print(f'Part 1: {max(seatArr)}\nPart 2: {missing}')
+part1 = max(seatIds)
+part2 = missing_numbers(sorted(seatIds))[0]
+print(f'Part 1: {part1}\nPart 2: {part2}')
